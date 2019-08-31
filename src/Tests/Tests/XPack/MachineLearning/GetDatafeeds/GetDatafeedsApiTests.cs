@@ -51,7 +51,7 @@ namespace Tests.XPack.MachineLearning.GetDatafeeds
 			firstDatafeed.QueryDelay.Should().BeGreaterThan(new Time("1nanos"));
 
 			firstDatafeed.Indices.Should().NotBeNull("Indices");
-			firstDatafeed.Indices.Should().Be(Nest.Indices.Parse("server-metrics"));
+			firstDatafeed.Indices.Should().Equal(Nest.Indices.Parse("server-metrics"));
 
 			firstDatafeed.ScrollSize.Should().Be(1000);
 
@@ -108,7 +108,7 @@ namespace Tests.XPack.MachineLearning.GetDatafeeds
 			firstDatafeed.QueryDelay.Should().BeGreaterThan(new Time("1nanos"));
 
 			firstDatafeed.Indices.Should().NotBeNull("Indices");
-			firstDatafeed.Indices.Should().Be(Nest.Indices.Parse("server-metrics"));
+			firstDatafeed.Indices.Should().Equal(Nest.Indices.Parse("server-metrics"));
 
 			firstDatafeed.ScrollSize.Should().Be(1000);
 

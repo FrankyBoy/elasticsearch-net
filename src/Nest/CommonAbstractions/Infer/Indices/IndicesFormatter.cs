@@ -23,35 +23,23 @@ namespace Nest
 			return new Indices(indices);
 		}
 
-		public void Serialize(ref JsonWriter writer, Indices value, IJsonFormatterResolver formatterResolver)
-		{
-			if (value == null)
-			{
+		public void Serialize(ref JsonWriter writer, Indices value, IJsonFormatterResolver formatterResolver) {
+			if (value == null) {
 				writer.WriteNull();
 				return;
 			}
 
-			switch (value.Tag)
-			{
-				case 0:
-					writer.WriteBeginArray();
-					writer.WriteString("_all");
-					writer.WriteEndArray();
-					break;
-				case 1:
-					var settings = formatterResolver.GetConnectionSettings();
-					writer.WriteBeginArray();
-					for (var index = 0; index < value.Item2.Indices.Count; index++)
-					{
-						if (index > 0)
-							writer.WriteValueSeparator();
 
-						var indexName = value.Item2.Indices[index];
-						writer.WriteString(indexName.GetString(settings));
-					}
-					writer.WriteEndArray();
-					break;
+			var settings = formatterResolver.GetConnectionSettings();
+			writer.WriteBeginArray();
+			for (var index = 0; index < value.Count; index++) {
+				if (index > 0)
+					writer.WriteValueSeparator();
+
+				var indexName = value[index];
+				writer.WriteString(indexName.GetString(settings));
 			}
+			writer.WriteEndArray();
 		}
 	}
 }

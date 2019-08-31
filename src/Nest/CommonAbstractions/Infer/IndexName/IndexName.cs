@@ -38,6 +38,10 @@ namespace Nest
 		
 		private static int TypeHashCode { get; } = typeof(IndexName).GetHashCode();
 
+		// TODO: maybe this would be better as a private subclass which overrides GetString.
+		// On the otherhand, why should "_all" ignore connection settings?
+		public static IndexName All { get; } = "_all";
+
 		bool IEquatable<IndexName>.Equals(IndexName other) => EqualsMarker(other);
 
 		public string GetString(IConnectionConfigurationValues settings)

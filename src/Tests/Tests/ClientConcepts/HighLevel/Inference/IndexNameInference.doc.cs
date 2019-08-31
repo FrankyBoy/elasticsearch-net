@@ -263,7 +263,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 
 			Nest.Indices indices1 = "foo,bar";
 			Nest.Indices indices2 = "bar,foo";
-			indices1.Should().Be(indices2);
+			indices1.Should().Equal(indices2);
 			(indices1 == indices2).Should().BeTrue();
 		}
 

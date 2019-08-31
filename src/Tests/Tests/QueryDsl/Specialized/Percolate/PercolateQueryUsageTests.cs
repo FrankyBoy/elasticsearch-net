@@ -92,7 +92,7 @@ namespace Tests.QueryDsl.Specialized.Percolate
 					}
 				}, d => d.Index(percolationIndex));
 				Client.Index(Project.Instance, i => i.Routing(Project.Instance.Name));
-				Client.Indices.Refresh(Nest.Indices.Index(percolationIndex).And<Project>());
+				Client.Indices.Refresh(new Nest.Indices(percolationIndex).And<Project>());
 			}
 		}
 	}

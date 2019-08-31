@@ -14,7 +14,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 			foreach (var t in equal)
 			{
 				(t == types).ShouldBeTrue(t);
-				t.Should().Be(types);
+				t.Should().Equal(types);
 			}
 
 			(Nest.Indices.All == "_all").Should().BeTrue();
@@ -28,7 +28,7 @@ namespace Tests.ClientConcepts.HighLevel.Inference.Equality
 			foreach (var t in notEqual)
 			{
 				(t != types).ShouldBeTrue(t);
-				t.Should().NotBe(types);
+				t.Should().NotEqual(types);
 			}
 		}
 

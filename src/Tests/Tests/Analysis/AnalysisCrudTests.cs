@@ -93,7 +93,7 @@ namespace Tests.Analysis
 				(s, c, r) => c.Indices.GetSettingsAsync(r)
 			);
 
-		protected GetIndexSettingsRequest GetInitializer(string indexName) => new GetIndexSettingsRequest(Nest.Indices.Index((IndexName)indexName));
+		protected GetIndexSettingsRequest GetInitializer(string indexName) => new GetIndexSettingsRequest(new Nest.Indices((IndexName)indexName));
 
 		protected IGetIndexSettingsRequest GetFluent(string indexName, GetIndexSettingsDescriptor u) => u;
 

@@ -17,24 +17,14 @@ namespace Nest
 			return null;
 		}
 
-		public void Serialize(ref JsonWriter writer, Indices value, IJsonFormatterResolver formatterResolver)
-		{
-			if (value == null)
-			{
+		public void Serialize(ref JsonWriter writer, Indices value, IJsonFormatterResolver formatterResolver) {
+			if (value == null) {
 				writer.WriteNull();
 				return;
 			}
 
-			switch (value.Tag)
-			{
-				case 0:
-					writer.WriteString("_all");
-					break;
-				case 1:
-					var connectionSettings = formatterResolver.GetConnectionSettings();
-					writer.WriteString(((IUrlParameter)value).GetString(connectionSettings));
-					break;
-			}
+			var connectionSettings = formatterResolver.GetConnectionSettings();
+			writer.WriteString(((IUrlParameter)value).GetString(connectionSettings));
 		}
 	}
 }

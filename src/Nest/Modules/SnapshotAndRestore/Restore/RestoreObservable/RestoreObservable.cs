@@ -55,9 +55,9 @@ namespace Nest
 				if (!restoreResponse.IsValid)
 					throw new ElasticsearchClientException(PipelineFailure.BadResponse, "Failed to restore snapshot.", restoreResponse.ApiCall);
 
-				EventHandler<RestoreNextEventArgs> onNext = (sender, args) => observer.OnNext(args.RecoveryStatusResponse);
-				EventHandler<RestoreCompletedEventArgs> onCompleted = (sender, args) => observer.OnCompleted();
-				EventHandler<RestoreErrorEventArgs> onError = (sender, args) => observer.OnError(args.Exception);
+				void onNext(object sender, RestoreNextEventArgs args) => observer.OnNext(args.RecoveryStatusResponse);
+				void onCompleted(object sender, RestoreCompletedEventArgs args) => observer.OnCompleted();
+				void onError(object sender, RestoreErrorEventArgs args) => observer.OnError(args.Exception);
 
 				_nextEventHandlers = onNext;
 				_completedEentHandlers = onCompleted;
@@ -79,9 +79,8 @@ namespace Nest
 
 		private void Restore(object state)
 		{
-			var observer = state as IObserver<RecoveryStatusResponse>;
-
-			if (observer == null) throw new ArgumentException($"must be an {nameof(IObserver<RecoveryStatusResponse>)}", nameof(state));
+			if (!(state is IObserver<RecoveryStatusResponse> observer))
+				throw new ArgumentException($"must be an {nameof(IObserver<RecoveryStatusResponse>)}", nameof(state));
 
 			try
 			{
@@ -172,7 +171,7 @@ namespace Nest
 			try
 			{
 				var indices =
-					_restoreRequest.Indices.Item2.Indices.Select(
+					_restoreRequest.Indices.Select(
 							x => IndexName.Rebuild(
 								Regex.Replace(x.Name, _renamePattern, _renameReplacement),
 								x.Type

@@ -81,7 +81,6 @@ namespace Tests.ClientConcepts.HighLevel.Inference
 		[U] public void Indices()
 		{
 			Implicit<Nest.Indices>((string)null).Should().BeNull();
-			Implicit<Nest.Indices>((Nest.Indices.ManyIndices)null).Should().BeNull();
 			Implicit<Nest.Indices>((string[])null).Should().BeNull();
 			Implicit<Nest.Indices>((IndexName)null).Should().BeNull();
 			Implicit<Nest.Indices>((IndexName[])null).Should().BeNull();

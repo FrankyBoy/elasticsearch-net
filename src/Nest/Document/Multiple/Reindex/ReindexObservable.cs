@@ -212,7 +212,7 @@ namespace Nest
 		{
 			if (_reindexRequest.OmitIndexCreation) return null;
 
-			var pointsToSingleSourceIndex = fromIndices.Match((a) => false, (m) => m.Indices.Count == 1);
+			var pointsToSingleSourceIndex = fromIndices.Count == 1 && fromIndices[0] != IndexName.All;
 			var targetExistsAlready = _client.Indices.Exists(resolvedTo);
 			if (targetExistsAlready.Exists) return null;
 

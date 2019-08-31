@@ -83,7 +83,7 @@ namespace Tests.XPack.MachineLearning.UpdateDatafeed
 			response.QueryDelay.Should().BeGreaterThan(new Time("1nanos"));
 
 			response.Indices.Should().NotBeNull("Indices");
-			response.Indices.Should().Be(Nest.Indices.Parse("server-metrics"));
+			response.Indices.Should().Equal(Nest.Indices.Parse("server-metrics"));
 
 			response.ScrollSize.Should().Be(1000);
 

@@ -173,7 +173,7 @@ namespace Tests.Core.ManagedElasticsearch.NodeSeeders
 					)
 				) };
 			await Task.WhenAll(tasks);
-			await Client.Indices.RefreshAsync(Indices.Index(typeof(Project), typeof(Developer), typeof(ProjectPercolation)));
+			await Client.Indices.RefreshAsync(new Indices(typeof(Project), typeof(Developer), typeof(ProjectPercolation)));
 		}
 
 		private Task<PutIndexTemplateResponse> CreateIndexTemplateAsync() => Client.Indices.PutTemplateAsync(

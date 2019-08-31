@@ -143,7 +143,7 @@ namespace Tests.XPack.Security.Role
 			role.Indices.Should().NotBeNullOrEmpty().And.HaveCount(1);
 
 			var indexPrivilege = role.Indices.First();
-			indexPrivilege.Names.Should().NotBeNull().And.Be(Infer.Indices("project"));
+			indexPrivilege.Names.Should().NotBeNull().And.Equal(Infer.Indices("project"));
 			indexPrivilege.FieldSecurity.Should().NotBeNull();
 			indexPrivilege.FieldSecurity.Grant.Should().NotBeNull().And.HaveCount(2);
 			indexPrivilege.Privileges.Should().NotBeNull().And.Contain("all");
@@ -161,7 +161,7 @@ namespace Tests.XPack.Security.Role
 			role.Indices.Should().NotBeNullOrEmpty().And.HaveCount(1);
 
 			var indexPrivilege = role.Indices.First();
-			indexPrivilege.Names.Should().NotBeNull().And.Be(Infer.Indices("project"));
+			indexPrivilege.Names.Should().NotBeNull().And.Equal(Infer.Indices("project"));
 			indexPrivilege.FieldSecurity.Should().NotBeNull();
 			indexPrivilege.FieldSecurity.Grant.Should().NotBeNull().And.HaveCount(2);
 			indexPrivilege.Privileges.Should().NotBeNull().And.Contain("all");

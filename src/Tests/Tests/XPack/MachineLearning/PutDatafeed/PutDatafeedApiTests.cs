@@ -13,7 +13,7 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 		: MachineLearningIntegrationTestBase<PutDatafeedResponse,
 			IPutDatafeedRequest, PutDatafeedDescriptor<Metric>, PutDatafeedRequest>
 	{
-		private IElasticClient _client;
+		private readonly IElasticClient _client;
 
 		public PutDatafeedApiTests(MachineLearningCluster cluster, EndpointUsage usage) : base(cluster, usage) => 
 			_client = cluster.Client;
@@ -75,9 +75,7 @@ namespace Tests.XPack.MachineLearning.PutDatafeed
 			response.QueryDelay.Should().BeGreaterThan(new Time("1nanos"));
 
 			response.Indices.Should().NotBeNull("Indices");
-			response.Indices.Match(
-				all => { Assert.True(false); },
-				many => { many.Indices.Should().HaveCount(1).And.Contain(_client.Infer.IndexName(typeof(Metric))); });
+			response.Indices.Should().HaveCount(1).And.Contain(_client.Infer.IndexName(typeof(Metric)));
 
 			response.ScrollSize.Should().Be(1000);
 
